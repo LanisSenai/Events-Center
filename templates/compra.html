@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/form.css" rel="stylesheet">
+
+    <title>Reserva</title>
+</head>
+<body>
+    <section>
+        <div class="form-area">
+                <div class="col-logo">
+                    <img src="/static/img/logoballet.png" class="logoballet">
+                </div>
+                {% if message %}
+                    <p style="color: white;">Sua reserva foi concluída com sucesso! Realize o pagamento diretamente no estabelecimento.</p>
+                {% endif %}
+            <form method="post">
+                <div class="formulario">
+                    <div class="col">
+                        <div class="rowt"><label for="nome">Nome:</label></div>
+                        <div class="rowt"><label for="telefone" >Telefone:</label></div>
+                        <div class="rowt"><label for="email">E-mail:</label></div>
+                        <div class="rowt"><label for="cpf">CPF: </label></div>
+                        <div class="rowt"><label for="idade">Faixa Etária: </label></div>
+                        <div class="rowt"><label for="evento">Evento: </label></div>
+                        <div class="rowt"><label for="evento">Preço: </label></div>
+                        </div>
+                    <div class="col">
+                        <div class="row"><input required type="text" name="nome" onlick="mudarCor()" class="campo"></div>
+
+                        <div class="row"><input required type="tel" name="telefone" class="campo"
+                            \
+			                title="Insira um número de telefone: (00) 99999-9999"\ 
+                            onkeyup="handlePhone(event)"
+                            ></div>
+                        <div class="row"><input required type="email" name="email" class="campo"></div>
+                        <div class="row"></div>
+                        <div class="row"><input required type="text" name="cpf" class="campo escolha"
+                            \
+                            title="Digite um CPF no formato: 000.000.000-99"\
+                            onkeyup="cpfMask(this.value)"
+			                ></div>
+                        <div class="rowc"><select class="campo escolha" name="idade" id="slc-idade">
+                            <option value="0-6">0-6</option> 
+                            <option value="7-10">7-10</option>
+                            <option value="+10">+10</option></select></div>
+                        <div class="rowc"><select class="campo escolha" name="evento" id="slc-evento">
+                            <option value="o_quebra_nozes_29_06_23">O Quebra Nozes- 29/06/23</option> 
+                            <option value="o_quebra_nozes_03_07_23">O Quebra Nozes- 03/07/23</option>
+                            <option value="cisne_negro_30_06_23">Cisne Negro- 30/06/23</option> 
+                            <option value="cisne_negro_04_07_23">Cisne Negro- 04/07/23</option>
+                            <option value="dom_quixote_01_07_23">Dom Quixote- 01/07/23</option> 
+                            <option value="dom_quixote_05_07_23">Dom Quixote- 05/07/23</option>
+                            <option value="coppelia_02_07_23">Coppélia- 02/07/23</option> 
+                            <option value="coppelia_06_07_23">Coppélia- 06/07/23</option></select>
+                        </div>
+                        <div class="row"><input required type="text" disabled class="campo" value="ISENTO" id="txt-valor" placeholder="Valor"></div>
+                        <input type="hidden" name="valor" value="0.00" id="valor">
+                    </div>
+
+                </div>
+                <div class="rowb"><button type="submit">RESERVAR</button></div>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            valores = { 
+                "o_quebra_nozes_29_06_23": 120.00
+                ,"o_quebra_nozes_03_07_23": 120.00
+                ,"cisne_negro_30_06_23": 80.00
+                ,"cisne_negro_04_07_23": 80.00
+                ,"dom_quixote_01_07_23": 80.00
+                ,"dom_quixote_05_07_23": 80.00
+                ,"coppelia_02_07_23": 80.00
+                ,"coppelia_06_07_23": 80.00
+            }
+
+            $(".escolha").on("change", function(){
+                idade = document.querySelector("#slc-idade").value;
+                evento = document.querySelector("#slc-evento").value;
+
+                if (idade == "0-6") {
+                    document.querySelector("#valor").value = 0.00;
+                    document.querySelector("#txt-valor").value = "ISENTO";
+                } else if (idade == "7-10") {
+                    document.querySelector("#valor").value = valores[evento]/2;
+                    document.querySelector("#txt-valor").value = valores[evento]/2;
+                } else {
+                    document.querySelector("#valor").value = valores[evento];
+                    document.querySelector("#txt-valor").value = valores[evento];
+                }
+            });
+        });
+    </script>
+    <script>
+
+        const handlePhone = (event) => {
+        let input = event.target
+        input.value = phoneMask(input.value)
+      }
+      
+      const phoneMask = (value) => {
+        if (!value) return "";
+        value = value.replace(/\D/g,'');
+        value = value.replace(/(\d{2})(\d)/,"($1) $2");
+        value = value.replace(/(\d)(\d{4})$/,"$1-$2");
+        return value;
+      }
+
+      function cpfMask(v){
+
+            v=v.replace(/\D/g,'');               //Remove tudo o que não é dígito
+            v=v.replace(/(\d{3})(\d)/,"$1.$2");       //Coloca um ponto entre o terceiro e o quarto dígitos
+            v=v.replace(/(\d{3})(\d)/,"$1.$2") ;      //Coloca um ponto entre o terceiro e o quarto dígitos
+                                                    //de novo (para o segundo bloco de números)
+            v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2"); //Coloca um hífen entre o terceiro e o quarto dígitos
+            return v;
+
+        }
+
+
+
+    </script>
+
+</body>
+</html>

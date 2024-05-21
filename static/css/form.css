@@ -1,0 +1,85 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+img.logoballet {
+    margin-bottom: 40px;
+}
+
+.campo {
+    background-color: black;
+    border: none;
+    border-bottom: 1px solid rgb(200, 165, 22);
+    color: rgb(255, 255, 255);
+    letter-spacing: 1px;
+    
+}
+
+button {
+    background-color: rgb(0, 0, 0);
+    border-color: rgb(200, 165, 22);
+    border-radius: 5px;
+    font-family: 'quebranozes';
+    src: url('MussicaSwash.otf')format('opentype');
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #fff
+}
+
+section{
+    background: url(/static/img/backform.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.formulario{
+    display: flex;
+    text-align: left;
+}
+
+.col{
+    margin-left: 10px;
+}
+
+.row{
+    margin: 10px;
+}
+
+.rowt{
+    margin: 12px;
+    color: #fff;
+}
+
+.form-area{
+    text-align: center;
+    height: 550px;
+    width: 350px;
+    border-radius: 8px; 
+    border:1px solid rgb(200, 165, 22);
+}
+
+.col-logo{
+    margin-top: 70px;
+}
+
+.rowc{
+    margin-top: 12px;
+    margin-left: 10px;
+}
+
+.rowb{
+    margin-top: 40px;
+}
+
